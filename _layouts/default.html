@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% include head.html %}
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KN76NDZ" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  {% include header.html %}
+  <div class="container">
+    <div class="post pt-1 pb-1">
+      <div class="shadow-lg p-3 mb-5 bg-body rounded">
+        {{ content }}
+      </div>
+    </div>
+  </div>
+  {% include tooltip.html %}
+  {% include footer.html %}
+
+</body>
+
+</html>

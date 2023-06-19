@@ -1,0 +1,16 @@
+---
+layout: page
+title: POCU
+---
+{% include breadcrumb-tags.html %}
+<br>
+{% for tag in site.tags %}
+  {% if tag[0] == page.title %}
+    <h2 class="tag-title">🏷️{{tag[0]}}</h2>
+    {% for post in tag[1] %}
+    <li>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  {% endif %}
+{% endfor %}

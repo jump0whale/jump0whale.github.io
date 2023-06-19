@@ -1,0 +1,18 @@
+---
+layout: page
+title: tags
+---
+{% include breadcrumb-cat.html %}
+<h2 class="cat-title">🏷️TAG</h2>
+<div class="tag-cloud">
+  {% for tag in site.tags %}
+  <!-- tag_name 변수 지정: 태그명은 소문자화(slugize) 한다 -->
+  {% capture tag_name %}{{tag|first|slugize}}{% endcapture %}
+  <!-- font_size 변수 지정: 태그숫자/전체태그숫자 * 100 + 50 -->
+  {% capture font_size %}{{tag|last|size| times:100 | divided_by:site.tags.size | plus: 50 }}%{% endcapture %}
+  <!-- tag_size 변수 지정-->
+  {% capture tag_size %}{{tag|last|size}}{% endcapture %}
+  <a href="{{tag_name}}" class="badge rounded-pill text-bg-light" onclick="showTag('{{tag_name}}')">
+    {{tag_name}}<sup>{{tag_size}}</sup></a>
+  {% endfor %}
+</div>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% include head.html %}
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KN76NDZ" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  {% include header.html %}
+  <div class="container">
+    <div class="post pt-1 pb-1">
+      <div class="shadow-lg p-3 mb-5 bg-body rounded">
+        <nav
+          style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+          aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">📁</a></li>
+            <li class="breadcrumb-item"><a href="/{{ page.categories }}/">{{ page.categories }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{{ post.url }}">{{ page.title }}</a></li>
+          </ol>
+        </nav>
+          <header class="post-header mb-3">
+            <h1 class="post-title display-4">
+              {{ page.title | escape }}
+            </h1>
+
+            {% if page.summary %}
+            <h6 class="post-summary"><small class="text-muted">{{ page.summary | escape }}</small></h6>
+            {% endif %}
+
+            <div class="post-tag pt-2 pb-2">
+              {% if page.tags %}
+              {% for tag in page.tags %}
+              <a href="/tags/{{ tag }}/" class="badge rounded-pill text-bg-light">🏷️{{ tag }}</a>
+              {% endfor %}
+              {% endif %}
+            </div>
+
+            <div class="post-time pt-2 pb-2 mb-3">
+              <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+                {%- assign date_format = site.date_format | default: "%y. %m. %d" -%}
+
+                {% if page.update %}
+                ✍️ 수정 {{ page.update | date: date_format }}<br>
+                {% endif %}
+                📅 작성 {{ page.date | date: date_format }}
+              </time>
+            </div>
+          </header>
+          {{ content }}
+      </div>
+      {%- include giscus.html -%}
+    </div>
+  </div>
+
+  {% include tooltip.html %}
+  {% include footer.html %}
+
+</body>
+
+</html>
