@@ -6,3 +6,9 @@ url: "https://jump0whale.github.io"
 
 # URL 규칙
 permalink: none
+
+paginate: 8
+paginate_path: "/page/:num/"
+
+plugins:
+  - jekyll-paginate
