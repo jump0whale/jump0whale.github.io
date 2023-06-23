@@ -26,22 +26,12 @@ a:link {
 	text-align: right;
 }
 
-.tr-top, .tr-bottom{
+.tr-top {
 	border-bottom-color:transparent;
 	text-align: right;
 }
 
-.tr-top, .td1 {
-	width: 400px;
-	text-align: left;
-}
-
 .td2 {
-	width: 10px;
-	text-align: right;
-}
 
-.td3 {
-	width: 150px;
 	text-align: right;
 }
