@@ -25,6 +25,11 @@ a:link {
 .post-time {
 	text-align: right;
 }
+.table {
+	max-width: 450px;
+	margin-left:auto;
+	margin-right:auto;
+}
 
 .tr-top {
 	border-bottom-color:transparent;
@@ -32,6 +37,5 @@ a:link {
 }
 
 .td2 {
-
 	text-align: right;
 }
