@@ -11,7 +11,7 @@ permalink: /archive/
 {% if currentdate != date %}
 {% unless forloop.first %}
 {% endunless %}
-<h1>{{ currentdate }}</h1>
+<h2>{{ currentdate }}</h2>
 {% assign date = currentdate %}
 {% endif %}
 <ul>
