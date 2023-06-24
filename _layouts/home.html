@@ -12,6 +12,7 @@ layout: default
 {% for post in paginator.posts %}
 
 <div class="mb-2">
+	<sub>
 	{% case post.categories[0] %}
 	{% when 'paper' %}
 	<a href="{{ post.categories }}" class="link-dark">📄{{ post.categories }}</a>
@@ -24,6 +25,7 @@ layout: default
 	{% else %}
 	⚠️ Debug.Fail("unknown type")
 	{% endcase %}
+	</sub>
 </div>
 
 <h3><a href="{{ post.url }}" class="link-dark">{{ post.title }}</a></h3>
