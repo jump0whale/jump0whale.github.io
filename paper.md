@@ -5,15 +5,16 @@ permalink: /paper/
 ---
 {% include breadcrumb-cat.html %}
 
-<h1 class="cat-title">📄PAPER</h1>
+{% assign category = page.category | default: page.title %}
+{% for post in site.categories[category] %}
+<div>
+<h4><a href="{{ site.baseurl }}{{ post.url }}" class="link-dark">{{ post.title }}</a></h4>
+{%- assign date_format = site.date_format | default: "%y. %m. %d" -%}
+📅 {{ post.date | date: date_format }}
 
-<ul class="cat-list">
-  {% assign category = page.category | default: page.title %}
+{% for tag in post.tags %}
+<a href="/tags/{{ tag }}/" class="badge rounded-pill text-bg-light">🏷️{{ tag }}</a>
+{% endfor %}
+</div><hr>
 
-  {% for post in site.categories[category] %}
-    <li>
-      <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-    </li>
-    <!-- <small>{{ post.date | date_to_string }}</small> -->
-  {% endfor %}
-</ul>
+{% endfor %}
