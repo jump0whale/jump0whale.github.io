@@ -1,7 +1,7 @@
 ---
 layout: page
-title: idea
-permalink: /idea/
+title: asm
+permalink: /asm/
 ---
 {% include breadcrumb-cat.html %}
 
