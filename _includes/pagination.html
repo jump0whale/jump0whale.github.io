@@ -19,11 +19,13 @@
       <span class="page-link">{{ paginator.page }}</span>
     </li>
     {% elsif page == 1 %}
-    <li class="page-item"><a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">{{ page }}</a>
+    <li class="page-item">
+      <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">{{ page }}</a>
     </li>
     {% else %}
-    <li class="page-item"><a class="page-link" href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{
-        page }}</a></li>
+    <li class="page-item">
+      <a class="page-link" href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
+    </li>
     {% endif %}
     {% endfor %}
 
