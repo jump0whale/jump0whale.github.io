@@ -10,17 +10,17 @@ layout: default
 </nav>
 
 {% for post in paginator.posts %}
-
+<!-- {% unless post.categories[0] == 'view' %} -->
 <div class="mb-2">
 	{% case post.categories[0] %}
 	{% when 'paper' %}
-	<a href="{{ post.categories }}" class="link-dark">📄{{ post.categories }}</a>
+	<a href="{{ post.categories }}" class="link-secondary">📄{{ post.categories }}</a>
 	{% when 'comp' %}
-	<a href="{{ post.categories }}" class="link-dark">💻{{ post.categories }}</a>
+	<a href="{{ post.categories }}" class="link-secondary">💻{{ post.categories }}</a>
 	{% when 'game' %}
-	<a href="{{ post.categories }}" class="link-dark">🕹️{{ post.categories }}</a>
+	<a href="{{ post.categories }}" class="link-secondary">🕹️{{ post.categories }}</a>
 	{% when 'idea' %}
-	<a href="{{ post.categories }}" class="link-dark">🤔{{ post.categories }}</a>
+	<a href="{{ post.categories }}" class="link-secondary">💭{{ post.categories }}</a>
 	{% else %}
 	⚠️ Debug.Fail("unknown type")
 	{% endcase %}
@@ -29,13 +29,15 @@ layout: default
 <h3><a href="{{ post.url }}" class="link-dark">{{ post.title }}</a></h3>
 
 {%- assign date_format = site.date_format | default: "%y. %m. %d" -%}
-📅 {{ post.date | date: date_format }}
+<span class="text-secondary">📅 {{ post.date | date: date_format }}</span>
 
 {% for tag in post.tags %}
-<a href="/tags/{{ tag }}/" class="badge rounded-pill text-bg-light">🏷️{{ tag }}</a>
+<span class="badge rounded-pill text-bg-light"><a href="/tags/{{ tag }}/" class="link-secondary">🏷️{{ tag }}</a></span>
 {% endfor %}
 
 <hr>
+<!-- {% endunless %} -->
 {% endfor %}
+
 
 {% include pagination.html %}
