@@ -10,7 +10,6 @@ layout: default
 </nav>
 
 {% for post in paginator.posts %}
-<!-- {% unless post.categories[0] == 'view' %} -->
 <div class="mb-2">
 	{% case post.categories[0] %}
 	{% when 'paper' %}
@@ -19,14 +18,14 @@ layout: default
 	<a href="{{ post.categories }}" class="link-secondary">💻{{ post.categories }}</a>
 	{% when 'game' %}
 	<a href="{{ post.categories }}" class="link-secondary">🕹️{{ post.categories }}</a>
-	{% when 'idea' %}
-	<a href="{{ post.categories }}" class="link-secondary">💭{{ post.categories }}</a>
+	{% when 'asm' %}
+	<a href="{{ post.categories }}" class="link-secondary">🧩{{ post.categories }}</a>
 	{% else %}
 	⚠️ Debug.Fail("unknown type")
 	{% endcase %}
 </div>
 
-<h3><a href="{{ post.url }}" class="link-dark">{{ post.title }}</a></h3>
+<h2 class="display-7"><a href="{{ post.url }}" class="link-dark">{{ post.title }}</a></h2>
 
 {%- assign date_format = site.date_format | default: "%y. %m. %d" -%}
 <span class="text-secondary">📅 {{ post.date | date: date_format }}</span>
@@ -36,8 +35,6 @@ layout: default
 {% endfor %}
 
 <hr>
-<!-- {% endunless %} -->
 {% endfor %}
-
 
 {% include pagination.html %}
