@@ -6,7 +6,7 @@ date : 2022-09-08
 update : 2023-05-31
 published: true
 categories: paper
-tags: 블록체인
+tags: 블록체인 가이드
 ---
 MetaMask에는 가장 잘 알려져 있는 비트코인, 이더리움 외에도 누군가가 발행한 코인도 추가를 할수 있습니다.
 

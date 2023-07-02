@@ -6,7 +6,7 @@ date : 2022-09-07
 #update : 2023-05-30
 published: true
 categories: paper
-tags: 블록체인
+tags: 블록체인 가이드
 ---
 <h2>메타마스크 소개</h2>
 
