@@ -3,20 +3,19 @@ layout: post
 title: 설정 초기화하기 - 소스트리(Sourcetree)
 #summary:
 date : 2022-09-13
-update : 2023-06-08
+update : 2023-07-02
 published: true
 categories: comp
-tags: POCU 프로그램
+tags: POCU 가이드
 ---
-<img src="/assets/ResetSourceTree/0.png" class="img-fluid">
 
-[출처](https://confluence.atlassian.com/sourcetreekb/how-to-wipe-sourcetree-preferences-412484640.html)
+### 참고 사이트
 
-소스트리 프로그램을 삭제한 뒤, 재설치 하지 않아도 됩니다.
+- [How to Wipe SourceTree Preferences](https://confluence.atlassian.com/sourcetreekb/how-to-wipe-sourcetree-preferences-412484640.html)
 
-**Windows**
+### Windows
 
-1.  명령프롬프트(관리자)를 실행후 아래 명령어를 차례로 입력
+- 명령프롬프트(관리자)를 실행후 아래 명령어를 입력합니다.
 
     <kbd>taskkill /f /im SourceTree.exe</kbd>
 
@@ -26,13 +25,9 @@ tags: POCU 프로그램
 
     <kbd>eixt</kbd>
 
-2. 또는 기본 경로에 설치 되어 있다는 가정 하에 아래의 배치 파일을 관리자 권한으로 실행
+### Mac OS
 
-    [다운로드](/assets/ResetSourceTree/sourcetree.bat)
-
-**Mac OS**
-
-* 터미널을 실행 후 아래 명령어를 차례로 입력
+- 터미널을 실행 후 아래 명령어를 입력합니다.
 
     <kbd>killall -9 Sourcetree</kbd>
 
@@ -41,3 +36,5 @@ tags: POCU 프로그램
     <kbd>defaults delete com.torusknot.SourceTreeNotMAS</kbd>
 
     <kbd>exit;</kbd>
+
+<img src="/assets/ResetSourceTree/0.png" class="img-fluid">
