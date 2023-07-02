@@ -1,0 +1,17 @@
+---
+layout: page
+title: 가이드
+---
+{% include breadcrumb-tags.html %}
+{% for tag in site.tags %}
+  {% if tag[0] == page.title %}
+    <h2 class="tag-title">🏷️{{tag[0]}}</h2>
+    {% for post in tag[1] %}
+    <ul>
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </li>
+    </ul>
+    {% endfor %}
+  {% endif %}
+{% endfor %}
