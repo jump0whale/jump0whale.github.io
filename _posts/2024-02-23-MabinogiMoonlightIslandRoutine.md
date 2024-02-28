@@ -3,7 +3,7 @@ layout: post
 title: 달빛 섬 육성하기
 summary: 마비노기 달빛 섬 공략
 date : 2024-02-07
-update : 2024-02-25
+update : 2024-02-28
 published: true
 categories: game
 tags: 마비노기
