@@ -16,26 +16,26 @@ MetaMask에는 가장 잘 알려져 있는 비트코인, 이더리움 외에도 
 
 1. 지갑 메인화면에서 `토큰 불러오기`를 찾아서 눌러줍니다.
 
-    <img src="/assets/metamask/0.png" class="img-fluid">
+    <img src="/assets/MetaMask/0.png" class="img-fluid">
 
 2. `맞춤 토큰` 탭으로 들어가서 `토큰 주소`에 추가하고 싶은 토큰의 주소를 넣어준 뒤 `불러오기`를  눌러줍니다.
 
     `0x6eb1eee8dcb041e2d3b2130ce124c3005dc3d6a7`
 
-    <img src="/assets/metamask/1.png" class="img-fluid">
+    <img src="/assets/MetaMask/1.png" class="img-fluid">
 
 ## 데스크탑
 
 1. 지갑 메인 화면에서 `토큰 가져오기`를 찾아서 눌러줍니다.
 
-    <img src="/assets/metamask/2.png" class="img-fluid">
+    <img src="/assets/MetaMask/2.png" class="img-fluid">
 
 2. `맞춤형 토큰` 탭에서 `토큰 계약 주소`에 토큰 주소를 넣어준 뒤 `맞춤형 토큰 추가`를 눌러줍니다.
 
     `0x6eb1eee8dcb041e2d3b2130ce124c3005dc3d6a7`
 
-    <img src="/assets/metamask/3.png" class="img-fluid">
+    <img src="/assets/MetaMask/3.png" class="img-fluid">
 
 3. `토큰 가져오기`를 눌러 줍니다.
 
-    <img src="/assets/metamask/4.png" class="img-fluid">
+    <img src="/assets/MetaMask/4.png" class="img-fluid">
