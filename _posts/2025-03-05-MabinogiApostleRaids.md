@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 마비노기 주간 / 일일 지령
-summary: 
+title: 주간/일일 지령 목록
+summary: 마비노기 사도 레이드 
 date : 2025-03-05
 published: true
 categories: game
