@@ -18,59 +18,36 @@ do {
     else { Write-Host "잘못된 선택입니다. 다시 입력해주세요." -ForegroundColor Red }
 } while ($true)
 
-# 옵션에 따라 레지스트리 파일 내용 구성하기
-$registryContent1 = @"
-Windows Registry Editor Version 5.00
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$guid]
-"TcpAckFrequency"=hex(b):01,00,00,00,00,00,00,00
-"TCPNoDelay"=hex(b):01,00,00,00,00,00,00,00
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched]
-"NonBestEffortLimit"=dword:00000000
-
-[HKEY_CURRENT_USER\Control Panel\Keyboard]
-"KeyboardSpeed"="48"
-"KeyboardDelay"="0"
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
-"NetworkThrottlingIndex"=dword:00000046
-"@
-
-$registryContent2 = @"
-Windows Registry Editor Version 5.00
-
-[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$guid]
-"TcpAckFrequency"=hex(b):01,00,00,00,00,00,00,00
-"TCPNoDelay"=hex(b):01,00,00,00,00,00,00,00
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched]
-"NonBestEffortLimit"=dword:00000000
-
-[HKEY_CURRENT_USER\Control Panel\Keyboard]
-"KeyboardSpeed"="31"
-"KeyboardDelay"="1"
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
-"NetworkThrottlingIndex"=dword:00000010
-"@
-
-$folderPath = $PSScriptRoot
-
 switch ($choice) {
     "1" {
-        $regFilePath = Join-Path -Path $folderPath -ChildPath "MainogiFastPing.reg"
-        $registryContent1 | Out-File -FilePath $regFilePath
-
         Write-Host ""
         Write-Host "TcpAckFrequency 적용" -ForegroundColor Cyan
+        Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$guid" `
+            -Name "TcpAckFrequency" -Type Binary -Value ([byte[]](1,0,0,0,0,0,0,0))
+        
         Write-Host "TCPNoDelay 적용" -ForegroundColor Cyan
-        Write-Host "NetworkThrottlingIndex 수정" -ForegroundColor Cyan
+        Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$guid" `
+            -Name "TCPNoDelay" -Type Binary -Value ([byte[]](1,0,0,0,0,0,0,0))
+        
         Write-Host ""
         Write-Host "KeyboardSpeed 수정" -ForegroundColor Cyan
+        Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "KeyboardSpeed" -Value 48
+        
         Write-Host "KeyboardDelay 수정" -ForegroundColor Cyan
+        Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "KeyboardDelay" -Value 0
+        
         Write-Host ""
-        Write-Host "QOS 패킷 스케줄러 예약 대약폭 제한 해제" -ForegroundColor Cyan
+        Write-Host "NetworkThrottlingIndex 수정" -ForegroundColor Cyan
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" `
+            -Name "NetworkThrottlingIndex" -Value 70
+        
+        Write-Host ""
+        Write-Host "예약 대역폭 제한 해제" -ForegroundColor Cyan
+        # Psched 키 생성 및 NonBestEffortLimit 값을 0으로 설정
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Psched" -Force | Out-Null
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Psched" `
+            -Name "NonBestEffortLimit" -Type DWord -Value 0
+        
         Write-Host ""
         Write-Host "MSMQ(Microsoft Message Queue) Server 활성화" -ForegroundColor Cyan
         Write-Host "MSMQ DCOM 프록시 활성화" -ForegroundColor Cyan
@@ -78,23 +55,36 @@ switch ($choice) {
         Write-Host "MSMQ 트리거 활성화" -ForegroundColor Cyan
         Write-Host "멀티캐스팅 지원 활성화" -ForegroundColor Cyan
         Write-Host ""
-        
-        regedit.exe /s $regFilePath
         Enable-WindowsOptionalFeature -Online -FeatureName "MSMQ-Container","MSMQ-Server","MSMQ-DCOMProxy","MSMQ-HTTP","MSMQ-Triggers","MSMQ-Multicast" | Out-Null
     }
     "2" {
-        $regFilePath = Join-Path -Path $folderPath -ChildPath "MainogiFastPing_restore.reg"
-        $registryContent2 | Out-File -FilePath $regFilePath
-
         Write-Host ""
         Write-Host "TcpAckFrequency 삭제" -ForegroundColor Red
+        Remove-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$guid" `
+            -Name "TcpAckFrequency" -ErrorAction SilentlyContinue
+        
         Write-Host "TCPNoDelay 삭제" -ForegroundColor Red
-        Write-Host "NetworkThrottlingIndex 복원" -ForegroundColor Red
+        Remove-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$guid" `
+            -Name "TCPNoDelay" -ErrorAction SilentlyContinue
+        
         Write-Host ""
         Write-Host "KeyboardSpeed 복원" -ForegroundColor Red
+        Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "KeyboardSpeed" -Value 31
+        
         Write-Host "KeyboardDelay 복원" -ForegroundColor Red
+        Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "KeyboardDelay" -Value 1
+        
         Write-Host ""
-        Write-Host "QOS 패킷 스케줄러 예약 대약폭 제한 설정" -ForegroundColor Red
+        Write-Host "NetworkThrottlingIndex 복원" -ForegroundColor Red
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" `
+            -Name "NetworkThrottlingIndex" -Value 16
+        
+        Write-Host ""
+        Write-Host "예약 대역폭 제한 설정" -ForegroundColor Red
+        # NonBestEffortLimit 값만 제거합니다.
+        Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Psched" `
+            -Name "NonBestEffortLimit" -ErrorAction SilentlyContinue
+        
         Write-Host ""
         Write-Host "MSMQ(Microsoft Message Queue) Server 비활성화" -ForegroundColor Red
         Write-Host "MSMQ DCOM 프록시 비활성화" -ForegroundColor Red
@@ -102,8 +92,6 @@ switch ($choice) {
         Write-Host "MSMQ 트리거 비활성화" -ForegroundColor Red
         Write-Host "멀티캐스팅 지원 비활성화" -ForegroundColor Red
         Write-Host ""
-
-        regedit.exe /s $regFilePath
         Disable-WindowsOptionalFeature -Online -FeatureName "MSMQ-Container","MSMQ-Server","MSMQ-DCOMProxy","MSMQ-HTTP","MSMQ-Triggers","MSMQ-Multicast" | Out-Null
     }
 }
