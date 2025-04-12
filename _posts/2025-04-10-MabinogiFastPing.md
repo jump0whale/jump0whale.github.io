@@ -18,7 +18,7 @@ tags: 마비노기
     
     ![](/assets/MabinogiFastPing/1.png)
 
-- 적용 항목
+- 적용된 항목
 
     - 네트워크 GUID 체크
 
@@ -34,7 +34,7 @@ tags: 마비노기
 
     - QOS 패킷 스케쥴러 예약 대역폭 제한 해제
 
-    - MSMQ(Microsoft Message Queue) Server
+    - MSMQ(Microsoft Message Queue) Server 활성화
 
     - MSMQ DCOM 프록시 활성화
 
